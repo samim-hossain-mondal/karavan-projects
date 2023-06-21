@@ -1,0 +1,46 @@
+apiVersion: camel.apache.org/v1
+kind: Integration
+metadata:
+  name: atlasmap
+spec:
+  flows:
+    - restConfiguration:
+        apiProperty:
+          - value: 3.20.1
+            key: openapi.version
+        dataFormatProperty:
+          - value: 'true'
+            key: prettyPrint
+        component: undertow
+        host: '{{karavan-service.hostname}}'
+        port: '{{karavan-service.port}}'
+        contextPath: /karavan-service
+        scheme: http
+        enableCors: true
+        apiComponent: openapi
+        bindingMode: 'off'
+    - rest:
+        post:
+          - to: direct:printJson
+            consumes: application/json
+            produces: application/json
+            path: /post
+            bindingMode: 'off'
+        path: /printjson
+        consumes: application/json
+        produces: application/json
+        id: print-json
+        bindingMode: 'off'
+    - route:
+        from:
+          uri: direct:printJson
+          steps:
+            - log:
+                message: 'Received: \n ${body}'
+            - to:
+                uri: atlasmap:atlasmap-mapping-dob-test.adm
+            - log:
+                message: 'Sent: \n ${body}'
+    - beans:
+        - name: serviceBean
+          type: MyService
