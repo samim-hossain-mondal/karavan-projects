@@ -1,1 +1,5 @@
-[]
+- route:
+    id: route-5a4e
+    from:
+      uri: kamelet:aws-kinesis-source
+      id: from-8daa
