@@ -1,9 +1,9 @@
-route:
+- route:
     id: route-5a4e
     from:
-      uri: kamelet:aws-kinesis-source
+      uri: 'kamelet:aws-kinesis-source'
       id: from-8daa
       steps:
-        - to:
-            uri: kamelet:avro-serialize-action
-            id: to-94e3
+        - log:
+            message: '${body}'
+            id: log-07de
