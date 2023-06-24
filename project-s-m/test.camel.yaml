@@ -1,0 +1,5 @@
+- route:
+    id: route-cc2c
+    from:
+      uri: direct
+      id: from-c557
