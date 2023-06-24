@@ -3,3 +3,7 @@
     from:
       uri: direct
       id: from-c557
+      steps:
+        - to:
+            uri: kamelet:avro-deserialize-action
+            id: to-8c2d
