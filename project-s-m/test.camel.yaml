@@ -5,5 +5,8 @@
       id: from-c557
       steps:
         - to:
-            uri: kamelet:avro-deserialize-action
+            uri: 'kamelet:avro-deserialize-action'
             id: to-8c2d
+        - log:
+            message: '${body}'
+            id: log-225c
