@@ -1,4 +1,4 @@
-route:
+- route:
     id: route-cc2c
     from:
       uri: direct
